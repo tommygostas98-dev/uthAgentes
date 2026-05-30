@@ -1,0 +1,29 @@
+# Despliegue en Fly.io. Ajusta 'app' y 'primary_region' a lo tuyo.
+#   fly launch --no-deploy   (la primera vez, o usa este archivo)
+#   fly volumes create uthagentes_data --size 1
+#   fly deploy
+app = "uthagentes-mcp"
+primary_region = "mia"
+
+[build]
+
+[env]
+  MCP_TRANSPORT = "streamable-http"
+  HOST = "0.0.0.0"
+  PORT = "8080"
+  UTHAGENTES_DB = "/data/uthagentes.db"
+  # El token NO va aqui (esto se commitea). Ponlo como secreto:
+  #   fly secrets set UTHAGENTES_TOKEN=$(python -c "import secrets;print(secrets.token_urlsafe(24))")
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  # min_machines_running = 0 ahorra costo pero produce "cold start" tras inactividad
+  # (la primera llamada tarda unos segundos). Pon 1 si quieres respuesta inmediata.
+  min_machines_running = 0
+
+[[mounts]]
+  source = "uthagentes_data"
+  destination = "/data"

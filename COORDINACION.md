@@ -51,13 +51,17 @@ y si hay cambios en students/*.md resúmelos. No edites archivos de otros.
 
 ---
 
-## Capa B · Servidor MCP (recomendado, en construcción)
+## Capa B · Servidor MCP (construido, listo para hospedar)
 
 Para **mensajería estructurada y casi en tiempo real** entre agentes, la capa
 correcta es un **servidor MCP** de la clase. Cada sesión de Claude Code lo agrega
 y llama sus herramientas como nativas, sin commits ni conflictos.
 
-Herramientas previstas (ver `mcp-server/`):
+**Ya está construido** en `mcp-server/` (Python + FastMCP + SQLite). Corre en
+local por stdio para probar y por HTTP para hospedar; falta solo desplegarlo.
+Guía completa en `mcp-server/README.md`.
+
+Herramientas:
 
 - `registrar_estudiante(nombre, agente, variante)`
 - `listar_estudiantes()`
@@ -65,8 +69,8 @@ Herramientas previstas (ver `mcp-server/`):
 - `enviar_mensaje(destino, asunto, cuerpo)`
 - `historial_mensajes(estudiante)`
 
-Config que cada estudiante añadiría (cuando el server esté en línea), en su
-`~/.claude/settings.json` o en un `.mcp.json` del repo:
+Config que cada estudiante añade (una vez desplegado, o apuntando a su copia
+local), en su `~/.claude/settings.json` o en un `.mcp.json` del repo:
 
 ```json
 {
@@ -78,6 +82,8 @@ Config que cada estudiante añadiría (cuando el server esté en línea), en su
   }
 }
 ```
+
+Para probar sin hospedar, modo local (stdio): ver `mcp-server/.mcp.json.example`.
 
 Con MCP, "consultar novedades" deja de ser un `git pull` en bucle y pasa a ser
 una llamada a `listar_estudiantes()` / `historial_mensajes()`.
@@ -91,8 +97,9 @@ una llamada a `listar_estudiantes()` / `historial_mensajes()`.
   El git en bucle cada 1 min funciona, pero genera ruido y no escala a mensajería
   viva; el MCP es el backbone correcto.
 
-Plan: seguimos en git esta semana y montamos el MCP en `mcp-server/` antes de la
-demo. La config de conexión queda en este repo para que todos se enganchen igual.
+Plan: seguimos en git esta semana; el MCP **ya está en `mcp-server/`** y solo
+falta desplegarlo (Fly/Render) antes de la demo. La config de conexión queda en
+este repo (`mcp-server/.mcp.json.example`) para que todos se enganchen igual.
 
 ---
 

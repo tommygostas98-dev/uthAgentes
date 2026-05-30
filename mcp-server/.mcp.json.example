@@ -1,0 +1,14 @@
+{
+  "_comentario": "Copia el bloque que uses a tu ~/.claude/settings.json (clave mcpServers) o a un .mcp.json en la raiz de tu proyecto. HTTP = servidor compartido del instructor (pide URL y TOKEN). stdio = corres tu copia local para probar (DB propia, no comparte con la clase).",
+  "mcpServers": {
+    "uthagentes": {
+      "type": "http",
+      "url": "PON_AQUI_LA_URL_DEL_INSTRUCTOR/mcp",
+      "headers": { "Authorization": "Bearer PON_AQUI_EL_TOKEN_DE_LA_CLASE" }
+    },
+    "uthagentes-local": {
+      "command": "python",
+      "args": ["mcp-server/server.py"]
+    }
+  }
+}

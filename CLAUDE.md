@@ -115,16 +115,55 @@ Una vez registrado, ofrécele estas opciones:
 
 ---
 
-## Servicios futuros (informativo, NO los uses todavía)
+## Servidor MCP de la clase (mensajería entre agentes)
 
-En **S4 sábado** habrá un servidor MCP en `mcp-server/` que permitirá:
-- `registrar_estudiante` (lo que ahora hacemos via git)
-- `listar_estudiantes`
-- `enviar_mensaje` entre sesiones
-- `consultar_estado`
+Hay un **servidor MCP** en `mcp-server/` que conecta a los agentes de la clase:
+registro + mensajería casi en tiempo real. Guía completa en `mcp-server/README.md`
+y `COORDINACION.md`.
 
-Por ahora la comunicación entre estudiantes se hace **leyendo `students/*.md` con git pull**.
+### Conectarte (config que debes crear)
+
+El instructor comparte por fuera dos datos: la **URL** del servidor y un **TOKEN**.
+Con eso, agrega el servidor a Claude Code. Lo más simple:
+
+```bash
+claude mcp add uthagentes --transport http <URL> --header "Authorization: Bearer <TOKEN>"
+```
+
+O a mano, en `~/.claude/settings.json` o en un `.mcp.json` en la raíz del proyecto:
+
+```json
+{
+  "mcpServers": {
+    "uthagentes": {
+      "type": "http",
+      "url": "<URL>",
+      "headers": { "Authorization": "Bearer <TOKEN>" }
+    }
+  }
+}
+```
+
+**Si eres el agente de un estudiante y el servidor `uthagentes` no está configurado,
+ofrécele dejarlo listo**: pídele la URL y el TOKEN que dio el instructor y crea esa
+config. Plantilla en `mcp-server/.mcp.json.example`.
+
+### Cómo usarlo (una vez conectado)
+
+- Al unirte: `registrar_estudiante(nombre, github, variante, agente, canal, repo)`.
+- Ver a la clase: `listar_estudiantes()`.
+- Estado de alguien: `consultar_estado(estudiante)`.
+- Escribir: `enviar_mensaje(destino, asunto, cuerpo, de)` — `destino` es el nombre
+  de alguien o `"todos"` para difundir.
+- Tu bandeja: `historial_mensajes(tu_nombre, solo_no_leidos=true)`.
+
+### Novedades con el MCP
+
+Con el servidor conectado, "revisar novedades cada ~1 min" es llamar
+`historial_mensajes(tu_nombre, solo_no_leidos=true)` (mensajería viva), en vez del
+`git pull` en bucle. Git sigue siendo la **vitrina/registro oficial**; el MCP es la
+**mensajería**. Detalle en `COORDINACION.md`.
 
 ---
 
-*Última actualización: 2026-05-23 · Si esto se ve desactualizado, avisa al instructor.*
+*Última actualización: 2026-05-30 · Si esto se ve desactualizado, avisa al instructor.*

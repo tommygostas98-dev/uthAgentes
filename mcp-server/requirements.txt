@@ -1,0 +1,2 @@
+# SDK oficial de MCP (incluye FastMCP, starlette y uvicorn para el transporte HTTP).
+mcp>=1.2
