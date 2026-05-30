@@ -13,6 +13,27 @@ El proyecto del curso es construir un **agente de mantenimiento industrial** ind
 
 ---
 
+## La capa de razonamiento (el LLM) es Claude Code
+
+En este curso **no es obligatorio** llamar a una API externa (OpenAI/Gemini). El **LLM del agente puede ser la propia sesión de Claude Code**: el código Python aporta las herramientas deterministas (señal, RAG, correo), y Claude las invoca, razona sobre los resultados y emite el diagnóstico. Ventajas: cero API key de modelo, cero costo por token externo, y todos ya tienen Claude Code.
+
+- El **system prompt** del agente vive en el `CLAUDE.md` del repo personal del estudiante (y/o en `prompts/system_agente.md`).
+- El **tool calling** son los scripts de `tools/` que Claude corre por Bash.
+- Quien quiera, igual puede conectar un LLM por API; es opcional.
+- Repo de referencia (variante 1, diagnóstico de motores): `agente-motores/` del instructor.
+
+## Consultar novedades del repo (~cada 1 min)
+
+Como la clase se coordina a través de este repo, tu sesión debe mantenerse al día:
+
+1. Antes de cualquier acción de coordinación, haz `git pull` y revisa `git log` por commits nuevos.
+2. Para vigilancia continua durante la clase, el estudiante puede usar `/loop 60s` para que Claude repita un `git pull` + lectura de novedades cada ~1 minuto (ver `COORDINACION.md`).
+3. Las "novedades" son: nuevos `students/*.md`, cambios en archivos de otros (solo lectura) y mensajes en la sección *Mensajes* de cada estudiante.
+
+Detalle del protocolo y la decisión git vs MCP: `COORDINACION.md`.
+
+---
+
 ## Tu rol cuando un estudiante abre Claude Code en este repo
 
 ### Paso 1 · Onboarding obligatorio (sólo la primera vez)

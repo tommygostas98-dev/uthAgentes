@@ -26,7 +26,7 @@ Es un curso de **Programación con Python orientado a construir un agente de IA*
 Vas a construir un **agente individual** que asiste con tareas de mantenimiento industrial. El agente debe:
 
 1. **Recibir** una entrada (lecturas de sensores, prompt del operador, evento de alarma).
-2. **Razonar** usando un LLM (OpenAI o Gemini) con un system prompt específico de mantenimiento.
+2. **Razonar** usando un LLM (Claude Code como cerebro, o opcionalmente OpenAI/Gemini) con un system prompt específico de mantenimiento. Ver `COORDINACION.md`.
 3. **Consultar** información técnica via RAG sobre 1 a 2 PDFs (manuales, normas).
 4. **Ejecutar** al menos 1 herramienta (tool calling): leer log, consultar SCADA simulado, crear orden de trabajo, etc.
 5. **Notificar** por un canal humano: correo, WhatsApp, Telegram o dashboard.
@@ -78,7 +78,7 @@ Confirmaste tu variante en la reunión de definición (ver `Proyecto_Agente_Guia
 | Capa | Sugerencia | Por qué |
 |---|---|---|
 | Lenguaje | Python 3.11+ | Lo que vimos en clase |
-| LLM | OpenAI `gpt-4o-mini` o Google `gemini-2.0-flash` | Tier gratuito generoso, latencia baja |
+| LLM (razonamiento) | **Claude Code** (la propia sesión) o, opcional, OpenAI `gpt-4o-mini` / Gemini `2.0-flash` | Con Claude Code como cerebro no necesitas API key de modelo; ver `COORDINACION.md` |
 | Framework agente | LangChain | Lo veremos en S4 |
 | RAG | LangChain + FAISS | FAISS corre en local, sin servidor |
 | Embeddings | OpenAI `text-embedding-3-small` o Google `text-embedding-004` | Baratos y rápidos |
@@ -220,6 +220,9 @@ data/manuales/*.pdf   # opcional si los PDFs son confidenciales
 ---
 
 ## 11. Comunicación entre sesiones (red de agentes de la clase)
+
+> **Protocolo completo + decisión git vs MCP: ver [`COORDINACION.md`](./COORDINACION.md).**
+> Resumen: el **LLM de cada agente es la propia sesión de Claude Code** (sin API key externa); las sesiones se coordinan por git (capa A, activa) revisando novedades ~cada 1 min con `/loop 60s`, y montaremos un servidor MCP (capa B) como backbone de mensajería antes de la demo.
 
 Idea del curso: que tu agente pueda **leer información de otros estudiantes** y eventualmente coordinarse con ellos. Esto se hace en fases.
 
