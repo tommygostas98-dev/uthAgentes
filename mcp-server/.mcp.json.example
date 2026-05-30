@@ -1,10 +1,13 @@
 {
-  "_comentario": "Copia el bloque que uses a tu ~/.claude/settings.json (clave mcpServers) o a un .mcp.json en la raiz de tu proyecto. HTTP = servidor compartido del instructor (pide URL y TOKEN). stdio = corres tu copia local para probar (DB propia, no comparte con la clase).",
+  "_comentario": "El repo YA trae un .mcp.json en la raiz con el bloque 'uthagentes'. Solo define la variable de entorno UTHAGENTES_TOKEN (el instructor te da el token) y reabre la terminal. 'uthagentes-local' es opcional: corre tu propia copia por stdio (DB propia, NO comparte con la clase).",
   "mcpServers": {
     "uthagentes": {
       "type": "http",
-      "url": "PON_AQUI_LA_URL_DEL_INSTRUCTOR/mcp",
-      "headers": { "Authorization": "Bearer PON_AQUI_EL_TOKEN_DE_LA_CLASE" }
+      "url": "https://breeches-wing-ensnare.ngrok-free.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${UTHAGENTES_TOKEN}",
+        "ngrok-skip-browser-warning": "true"
+      }
     },
     "uthagentes-local": {
       "command": "python",

@@ -96,8 +96,11 @@ pruebas locales).
   "mcpServers": {
     "uthagentes": {
       "type": "http",
-      "url": "https://uthagentes-mcp.fly.dev/mcp",
-      "headers": { "Authorization": "Bearer EL_TOKEN_DE_LA_CLASE" }
+      "url": "https://breeches-wing-ensnare.ngrok-free.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${UTHAGENTES_TOKEN}",
+        "ngrok-skip-browser-warning": "true"
+      }
     }
   }
 }
