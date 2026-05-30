@@ -226,7 +226,7 @@ data/manuales/*.pdf   # opcional si los PDFs son confidenciales
 
 Idea del curso: que tu agente pueda **leer información de otros estudiantes** y eventualmente coordinarse con ellos. Esto se hace en fases.
 
-### Fase A · GitHub compartido (lo armaremos en S4)
+### Fase A · GitHub compartido (activa)
 
 Un repo central de la clase: `uth-programacion-2026-4/clase-agentes`. Cada estudiante tiene un archivo `students/<tu_nombre>.md` con su info, variante, repo personal, tipo de agente. Tu agente local puede:
 
@@ -235,16 +235,17 @@ Un repo central de la clase: `uth-programacion-2026-4/clase-agentes`. Cada estud
 
 Ventaja: cero infra extra, todos saben usar git, queda auditable. Limitación: no es tiempo real; es "buzón compartido".
 
-### Fase B · Servidor MCP de la clase (si avanzamos rápido)
+### Fase B · Servidor MCP de la clase (construido, falta desplegar)
 
-MCP (Model Context Protocol) es el estándar que usa Claude Code para conectarse a servicios externos. Yo levanto **un MCP server** en Render o Fly.io con herramientas como:
+MCP (Model Context Protocol) es el estándar que usa Claude Code para conectarse a servicios externos. El **MCP server** de la clase ya está construido en [`mcp-server/`](./mcp-server/) (Python + FastMCP + SQLite, con tests) y se hospeda en Fly.io o Render. Expone herramientas como:
 
-- `registrar_estudiante(nombre, agente, variante)`
+- `registrar_estudiante(nombre, agente, variante, ...)`
 - `listar_estudiantes()`
-- `enviar_mensaje(destino, asunto, cuerpo)`
 - `consultar_estado(estudiante)`
+- `enviar_mensaje(destino, asunto, cuerpo)` — destino puede ser un nombre o `"todos"`.
+- `historial_mensajes(estudiante, solo_no_leidos)`
 
-Cada estudiante agrega ese servidor a su `~/.claude/settings.json` y sus sesiones pueden conversar entre sí en tiempo casi-real.
+Cada estudiante agrega ese servidor a su `~/.claude/settings.json` o a un `.mcp.json` del repo (snippet listo en [`mcp-server/.mcp.json.example`](./mcp-server/.mcp.json.example)) y sus sesiones pueden conversar entre sí en tiempo casi-real.
 
 Tiempo real real con webhooks bidireccionales viene en otra capa (no la cubriremos en este curso, pero queda como semilla para una tesis).
 
@@ -254,7 +255,7 @@ Tiempo real real con webhooks bidireccionales viene en otra capa (no la cubrirem
 - **Firebase Realtime DB**: requiere SDK propio, menos elegante que MCP.
 - **REST API casera**: equivalente a MCP pero sin estandarizar; mejor MCP.
 
-**Recomendación**: empezamos con Fase A (GitHub compartido) en S4 viernes; si el grupo va bien, pasamos a Fase B en S4 sábado.
+**Estado**: la Fase A está activa. El MCP de la Fase B está construido en `mcp-server/` y se despliega antes de la demo del S4 sábado. Detalle de la decisión y el protocolo en [`COORDINACION.md`](./COORDINACION.md).
 
 ---
 

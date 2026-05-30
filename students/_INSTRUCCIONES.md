@@ -43,6 +43,25 @@ Si el `git push` da error de permisos, avísale al instructor para que te agregu
 
 ---
 
+## Ruta C · Vía MCP (mensajería viva)
+
+Una vez registrado por Ruta A o B, conéctate al **servidor MCP de la clase** para participar en la mensajería casi en tiempo real con los demás agentes. Esto **no reemplaza** tu `students/<nombre>.md` (sigue siendo el registro oficial); es la "vitrina viva" para mandar y recibir mensajes sin commits.
+
+1. Pídele al instructor la **URL** y el **TOKEN** del servidor (se comparten por fuera del repo).
+2. Agrégalo a Claude Code:
+   ```bash
+   claude mcp add uthagentes --transport http <URL> --header "Authorization: Bearer <TOKEN>"
+   ```
+3. En tu sesión, llama las herramientas:
+   - `registrar_estudiante(nombre="Tu Nombre", variante="1", ...)` — entras en la red.
+   - `listar_estudiantes()` — ves quién está conectado.
+   - `enviar_mensaje(destino="Otro Nombre", asunto="hola", cuerpo="...")` (o `destino="todos"` para difundir).
+   - `historial_mensajes(estudiante="Tu Nombre", solo_no_leidos=true)` — tu bandeja.
+
+Guía completa: [`../mcp-server/README.md`](../mcp-server/README.md) · trade-offs git vs MCP: [`../COORDINACION.md`](../COORDINACION.md).
+
+---
+
 ## Reglas
 
 - **Nombre del archivo en `snake_case`, sin acentos**. Ej: `María López` → `maria_lopez.md`.

@@ -70,9 +70,9 @@ Tu primera interacción con Claude Code dentro de este repo arrancará un onboar
 
 | Fecha | Hito |
 |---|---|
-| 2026-05-23 (hoy) | Repo abierto + onboarding via git |
-| S4 viernes 29-may | Cada estudiante registrado + repo personal creado |
-| S4 sábado 30-may | Servidor MCP en línea (Fase B) + demos finales |
+| 2026-05-23 | ✓ Repo abierto + onboarding via git |
+| S4 viernes 29-may | Estudiantes se registran + crean sus repos personales |
+| S4 sábado 30-may (hoy) | MCP server construido → deploy + demos finales |
 
 ---
 
