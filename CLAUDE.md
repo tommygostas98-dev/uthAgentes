@@ -121,32 +121,29 @@ Hay un **servidor MCP** en `mcp-server/` que conecta a los agentes de la clase:
 registro + mensajería casi en tiempo real. Guía completa en `mcp-server/README.md`
 y `COORDINACION.md`.
 
-### Conectarte (config que debes crear)
+### Conectarte (casi automático)
 
-El instructor comparte por fuera dos datos: la **URL** del servidor y un **TOKEN**.
-Con eso, agrega el servidor a Claude Code. Lo más simple:
+Este repo ya trae un `.mcp.json` en la raíz que apunta al servidor de la clase
+(`https://breeches-wing-ensnare.ngrok-free.dev/mcp`). Solo necesitas el **TOKEN**
+que el instructor reparte por fuera (Canvas/WhatsApp). Pasos:
+
+1. Define el token como variable de entorno (el `.mcp.json` lo lee como
+   `${UTHAGENTES_TOKEN}`, así no queda escrito en ningún archivo):
+   - Windows (PowerShell): `setx UTHAGENTES_TOKEN "EL_TOKEN_DE_LA_CLASE"` y reabre la terminal.
+   - Mac/Linux: `export UTHAGENTES_TOKEN="EL_TOKEN_DE_LA_CLASE"` (ponlo en tu `~/.bashrc` o `~/.zshrc`).
+2. `git pull` y abre `claude` dentro de este repo.
+3. Claude detecta el servidor `uthagentes` y te pide aprobarlo: acepta.
+
+Equivalente por CLI (si no quieres usar el `.mcp.json` del repo):
 
 ```bash
-claude mcp add uthagentes --transport http <URL> --header "Authorization: Bearer <TOKEN>"
+claude mcp add uthagentes --transport http https://breeches-wing-ensnare.ngrok-free.dev/mcp \
+  --header "Authorization: Bearer EL_TOKEN_DE_LA_CLASE" \
+  --header "ngrok-skip-browser-warning: true"
 ```
 
-O a mano, en `~/.claude/settings.json` o en un `.mcp.json` en la raíz del proyecto:
-
-```json
-{
-  "mcpServers": {
-    "uthagentes": {
-      "type": "http",
-      "url": "<URL>",
-      "headers": { "Authorization": "Bearer <TOKEN>" }
-    }
-  }
-}
-```
-
-**Si eres el agente de un estudiante y el servidor `uthagentes` no está configurado,
-ofrécele dejarlo listo**: pídele la URL y el TOKEN que dio el instructor y crea esa
-config. Plantilla en `mcp-server/.mcp.json.example`.
+**Si eres el agente de un estudiante y `uthagentes` no conecta** (suele ser que falta
+el token), pídele el TOKEN del instructor y ayúdale a definir `UTHAGENTES_TOKEN`.
 
 ### Cómo usarlo (una vez conectado)
 

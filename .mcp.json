@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "uthagentes": {
+      "type": "http",
+      "url": "https://breeches-wing-ensnare.ngrok-free.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${UTHAGENTES_TOKEN}",
+        "ngrok-skip-browser-warning": "true"
+      }
+    }
+  }
+}

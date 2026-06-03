@@ -77,13 +77,19 @@ local), en su `~/.claude/settings.json` o en un `.mcp.json` del repo:
   "mcpServers": {
     "uthagentes": {
       "type": "http",
-      "url": "https://uthagentes-mcp.fly.dev/mcp"
+      "url": "https://breeches-wing-ensnare.ngrok-free.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${UTHAGENTES_TOKEN}",
+        "ngrok-skip-browser-warning": "true"
+      }
     }
   }
 }
 ```
 
-Para probar sin hospedar, modo local (stdio): ver `mcp-server/.mcp.json.example`.
+> El repo ya trae este bloque en el `.mcp.json` de la raíz; el alumno solo define
+> la variable de entorno `UTHAGENTES_TOKEN` con el token que da el instructor.
+> Para probar sin servidor compartido, modo local (stdio): ver `mcp-server/.mcp.json.example`.
 
 Con MCP, "consultar novedades" deja de ser un `git pull` en bucle y pasa a ser
 una llamada a `listar_estudiantes()` / `historial_mensajes()`.
