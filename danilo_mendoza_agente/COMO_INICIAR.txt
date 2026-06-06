@@ -1,0 +1,62 @@
+============================================================
+  AGENTE DE MANTENIMIENTO INDUSTRIAL - CÓMO INICIAR
+============================================================
+
+------------------------------------------------------------
+1) INICIAR LA APP (lo único imprescindible)
+------------------------------------------------------------
+Abre PowerShell y escribe estas dos líneas:
+
+    cd "C:\Users\Admin\Desktop\Danilo M\Progrma de clase programacionUTH\Agente clase de programacion"
+    streamlit run app.py
+
+Se abre solo en el navegador:  http://localhost:8501
+
+Para DETENERLA:  presiona  Ctrl + C  en la terminal.
+
+NOTA: tus datos están guardados en  data\mantenimiento.db
+      (equipos, órdenes y lecturas siguen ahí cada vez que abras).
+
+
+------------------------------------------------------------
+2) SI CAMBIAS DE COMPUTADORA O REINSTALAS (una sola vez)
+------------------------------------------------------------
+Instala las dependencias:
+
+    cd "C:\Users\Admin\Desktop\Danilo M\Progrma de clase programacionUTH\Agente clase de programacion"
+    pip install -r requirements.txt
+
+
+------------------------------------------------------------
+3) CONFIGURACIÓN OPCIONAL (archivo .env)
+------------------------------------------------------------
+La app funciona sin esto. Solo se necesita para:
+
+ - Asistente IA:  pega tu clave en  ANTHROPIC_API_KEY
+ - Enviar correo: pon GMAIL_USER y GMAIL_APP_PASSWORD
+                  (contraseña de aplicación de Gmail:
+                   https://myaccount.google.com/apppasswords)
+
+Para editar:   notepad ".env"
+
+
+------------------------------------------------------------
+4) SECCIONES DE LA APP (menú lateral)
+------------------------------------------------------------
+ 📊 Panel          - indicadores y alertas
+ 📋 Equipos        - alta/edición, horas de operación, historial
+ 🔧 Órdenes        - crear, cerrar, y ver el reporte vinculado
+ 🔮 Predictivo     - lecturas, importar CSV/Excel, límites, tendencias
+ 📈 Reportes       - costos y exportación CSV / Excel / PDF
+ 📄 Documentos     - descargar los reportes de falla
+ 📧 Correo         - enviar reportes y alertas (requiere Gmail)
+ 🤖 Asistente IA   - diagnóstico y procedimientos (requiere clave)
+
+
+------------------------------------------------------------
+5) PARA SEGUIR MEJORÁNDOLA CON CLAUDE
+------------------------------------------------------------
+Abre un chat nuevo y di:  "Sigamos con el agente de mantenimiento"
+(el proyecto está guardado en la memoria de Claude).
+
+============================================================

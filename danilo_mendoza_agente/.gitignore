@@ -1,0 +1,29 @@
+# Entorno y secretos
+.env
+*.env
+
+# Datos privados / confidenciales (no se exponen en la app ni se versionan)
+_datos/
+
+# Base de datos local
+data/*.db
+data/*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Respaldos de BD y logs (no versionar)
+data/*.bak-*
+data/*.db.bak-*
+*.log

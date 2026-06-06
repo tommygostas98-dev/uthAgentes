@@ -1,0 +1,45 @@
+{
+  "fecha_snapshot": "2026-06-04",
+  "config_bd": {
+    "auto_alertas_activo": "0",
+    "auto_alertas_cooldown_horas": "876000",
+    "auto_alertas_destino": "mani.mendoza2406@gmail.com",
+    "auto_alertas_firma": "913c62f1983887e5",
+    "auto_alertas_ultimo_envio": "2026-06-03T20:05:52",
+    "modo_agente_ia": "1",
+    "watcher_equipo_lecturas": "U14",
+    "watcher_patron_lecturas": "lecturas_nuevas"
+  },
+  "vigia_infra": {
+    "launcher_startup": "MotoVigia_vigia.vbs (carpeta Inicio de Windows)",
+    "supervisor": "vigilancia_alertas.py --supervisor 2",
+    "loop": "vigilancia_alertas.py --loop 2.0 (deteccion watchdog instantanea)",
+    "auto_restart": true,
+    "auto_restart_nota": "el .vbs solo relanza al INICIAR SESION; el supervisor relanza el loop, pero si el supervisor TAMBIEN muere (paso 2026-06-04) NADIE lo revive hasta el proximo login -> verificar Get-Process pythonw = 2 antes del demo"
+  },
+  "canales": {
+    "A_correo": "mani.mendoza2406@gmail.com",
+    "B_mcp_url": "https://breeches-wing-ensnare.ngrok-free.dev/mcp",
+    "B_mcp_tool": "enviar_mensaje(destino=todos)",
+    "token_seteado": true
+  },
+  "estado_hoy": {
+    "bd": "baseline limpio (0 alertas criticas)",
+    "modelo_envio": "YO genero/suelto el archivo; el VIGIA lo procesa y envia via su propio agente Claude (modo_agente_ia=1). NO enviar manualmente ademas, o habra doble alarma.",
+    "escenarios_probados": [
+      "W47 devanado_critico -> LIMITE alta CRITICO (temperatura_devanado_A)",
+      "W48 presion_baja -> LIMITE baja CRITICO (presion_aceite)",
+      "W49 salto_escape -> ANOMALIA/SALTO (temperatura_gases_escape; el limite no lo ve)",
+      "W50 devanado_critico (ciclo)"
+    ],
+    "resultado": "4/4 enviados por el agente del vigia, 1 falla limpia cada uno (~50 s)",
+    "archivos_listos": "_simulaciones/lecturas_nuevas_W47..W50.csv",
+    "scripts": [
+      "generar_lecturas.py (generador de escenarios)",
+      "reiniciar_baseline_u14.py (reset + baseline sano, respalda la BD)"
+    ],
+    "guia_usuario": "GUIA_DEMO_SABADO.md (carpeta del proyecto)",
+    "respaldos_bd": "data/mantenimiento.db.bak-* (revertir copiando sobre mantenimiento.db con el vigia detenido)",
+    "reloj_maquina": "inestable: vistos saltos de tiempo en el log (no afecta el demo)"
+  }
+}

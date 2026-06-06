@@ -1,0 +1,4 @@
+﻿parametro,valor,unidad,horas_operacion,fecha
+temperatura_aceite,88.0,C,11900,2026-05-20
+temperatura_aceite,90.0,C,11960,2026-05-28
+vibracion,2.5,mm/s,11960,2026-05-28
